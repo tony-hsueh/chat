@@ -1,23 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import { RouterProvider, createBrowserRouter, BrowserRouter, Routes, Router } from 'react-router-dom'
+import Chatroom from './Chatroom';
+import Login from './Login';
+import Lobby from './Lobby';
+import Privateroom from './Privateroom';
+import './App.css';
+import { useState } from 'react';
+
+function App() { 
+  const [user, setUser] = useState('')
+  const [onlineUsers, setOnlineUsers] = useState([])
+
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <Login setUser={setUser}/>
+    },
+    {
+      path: '/lobby',
+      element: <Lobby 
+                user={user} 
+                setOnlineUsers={setOnlineUsers} 
+                onlineUsers={onlineUsers}
+              />
+    },
+    {
+      path: '/room',
+      element: <Chatroom />,
+    },
+    {
+      path: '/private-room/:userId/:username',
+      element: <Privateroom 
+                user={user} 
+                onlineUsers={onlineUsers}
+                setOnlineUsers={setOnlineUsers}  
+                />,
+    }
+  ])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <RouterProvider router={router} />
+      {/* <BrowserRouter>
+        <Routes>
+          <Router />
+        </Routes>
+      </BrowserRouter> */}
     </div>
   );
 }

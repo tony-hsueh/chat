@@ -1,0 +1,19 @@
+.private-chat {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.private-chat > .messages-wrap {
+  border-radius: 0;
+  flex-grow: 1;
+}
+
+.name-bar {
+  background-color: #78a1df;
+  padding: 1rem;
+  color: rgb(37, 37, 37);
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+}
